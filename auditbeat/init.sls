@@ -1,4 +1,4 @@
-{% set auditbeat = pillar['audibeat'] %}
+{% set auditbeat = pillar['auditbeat'] %}
 
 add auditbeat repo:
   pkgrepo.managed:
