@@ -1,0 +1,19 @@
+auditbeat:
+  repo: 7.x
+  version: 7.5.1
+  hold: True
+  restart: True
+  enable: True
+  config:
+    auditbeat.modules:
+      - module: audit
+        metricset: [file]
+        file.paths:
+          - /bin
+          - /usr/bin
+          - /sbin
+          - /usr/sbin
+          - /etc
+    output.logstash:
+      hosts: ["localhost:9200"]
+      logging.to_files: true
