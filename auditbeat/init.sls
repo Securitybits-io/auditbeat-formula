@@ -2,7 +2,7 @@
 
 add auditbeat repo:
   pkgrepo.managed:
-    - humanname: Auditbeat Repo {{ audibeat['repo'] }}
+    - humanname: Auditbeat Repo {{ auditbeat['repo'] }}
     - name: deb https://artifacts.elastic.co/packages/{{ auditbeat['repo'] }}/apt stable main
     - file: /etc/apt/sources.list.d/auditbeat.list
     - key_url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
@@ -20,7 +20,7 @@ auditbeat:
     - restart: {{ auditbeat['restart'] | default(True) }}
     - enable: {{ auditbeat['enable'] | default(True) }}
     - require:
-      - salt: install auditbeat
+      - install auditbeat
     - watch:
       - pkg: auditbeat
       {% if salt['pillar.get']('auditbeat:config', {}) %}
@@ -36,5 +36,5 @@ auditbeat:
     - group: root
     - mode: 644
     - require:
-      - salt: install auditbeat
+      - install auditbeat
 {% endif %}
